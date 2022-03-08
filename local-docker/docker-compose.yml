@@ -1,0 +1,50 @@
+version: '3.9'
+
+networks:
+  local:
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    container_name: '${APP_NAME}-server'
+    ports:
+      - '${APP_PORT}:80'
+      - '${SSL_PORT}:443'
+    working_dir: /var/www/local/
+    environment:
+      - 'DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASS}@db_server:3306/${MYSQL_DB}'
+    volumes:
+      - ./sources:/var/www/local/
+      - ./docker/server/apache/sites-enabled:/etc/apache2/sites-enabled
+      - ./docker/server/php/php.ini:/usr/local/etc/php/conf.d/extra-php-config.ini
+      - ./docker/server/certs:/var/www/local/certs
+    depends_on:
+      db_server:
+        condition: service_healthy
+    networks:
+      - local
+
+  db_server:
+    image: mariadb
+    container_name: '${APP_NAME}-db'
+    restart: always
+    ports:
+      - '${DB_PORT}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASS}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASS}'
+      MYSQL_DATABASE: '${MYSQL_DB}'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      retries: 5
+    networks:
+      - local
+volumes:
+  db_data:
