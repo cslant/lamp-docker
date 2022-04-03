@@ -20,9 +20,6 @@ services:
       - ./docker/server/apache/sites-enabled:/etc/apache2/sites-enabled
       - ./docker/server/php/php.ini:/usr/local/etc/php/conf.d/extra-php-config.ini
       - ./docker/server/certs:/var/www/local/certs
-    depends_on:
-      db_server:
-        condition: service_healthy
     networks:
       - local
 
@@ -41,7 +38,7 @@ services:
       - db_data:/var/lib/mysql
       - ./docker/db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
     healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      test: mysqladmin ping -h 127.0.0.2 -u root --password=$$MYSQL_ROOT_PASSWORD
       interval: 5s
       retries: 5
     networks:

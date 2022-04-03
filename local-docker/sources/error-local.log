@@ -1,6 +1,0 @@
-[Tue Mar 08 04:09:26.659741 2022] [ssl:warn] [pid 1] AH01906: local.localhost.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
-[Tue Mar 08 04:09:26.693587 2022] [ssl:warn] [pid 1] AH01906: local.localhost.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
-[Tue Mar 08 05:19:03.465590 2022] [ssl:warn] [pid 1] AH01906: local.localhost.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
-[Tue Mar 08 05:19:03.491100 2022] [ssl:warn] [pid 1] AH01906: local.localhost.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
-[Tue Mar 08 07:30:15.465902 2022] [ssl:warn] [pid 1] AH01906: local.localhost.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
-[Tue Mar 08 07:30:15.498879 2022] [ssl:warn] [pid 1] AH01906: local.localhost.com:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
