@@ -38,9 +38,19 @@ services:
       - db_data:/var/lib/mysql
       - ./docker/db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
     healthcheck:
-      test: mysqladmin ping -h 127.0.0.2 -u root --password=$$MYSQL_ROOT_PASSWORD
+      test: mysqladmin ping -h ${IP_DB_SERVER} -u root --password=$$MYSQL_ROOT_PASSWORD
       interval: 5s
       retries: 5
+    networks:
+      - local
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - '${PHPMYADMIN_PORT}:${DB_PORT}'
+    environment:
+      PMA_HOST: db_server #using db_server host line 26
     networks:
       - local
 volumes:
