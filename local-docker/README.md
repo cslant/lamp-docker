@@ -4,7 +4,6 @@
 
 ## Steps
 
-- copy PYL source code to folder **codebase**
 - modify **.env**
 - run `docker-compose up -d`
 
