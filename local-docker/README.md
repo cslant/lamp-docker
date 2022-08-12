@@ -4,10 +4,10 @@ This is a simple Docker Compose workflow that sets up a LAMP network of containe
 
 ## I. Configuration requirements
 
-To use the fpm image, you need an additional web server, such as apache, that can proxy http-request to the fpm-port of the container. For fpm connection this container exposes port 9000.
+To use the fpm image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
 
+ - PHP 7.4
  - Web-server: Apache
- - PHP: 7.4
  - DBMS (database management system): mariadb
  - SSL Certificate (using mkcert)
  
