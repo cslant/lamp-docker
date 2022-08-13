@@ -6,6 +6,7 @@ This is a simple Docker Compose workflow that sets up a LAMP network of containe
 
 To use the fpm image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
 
+ - Multi-site integration
  - PHP 8.1
  - Web-server: Apache
  - DBMS (database management system): mariadb

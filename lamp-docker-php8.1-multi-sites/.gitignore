@@ -1,2 +1,3 @@
 .idea
 *.log
+docker/server/certs
