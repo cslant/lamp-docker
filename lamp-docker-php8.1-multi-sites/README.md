@@ -61,7 +61,7 @@ docker-compose up -d
 - Run the command `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_ID>`
 
 ```shell
-docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}} <container_ID>
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_ID>
 ```
 
 ![image](https://imgur.com/eXqHQVb.png)
