@@ -7,13 +7,13 @@
 To use the optional PHP image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
 
  - Multi-site integration
- - PHP optional version with custom in .env file
+ - **PHP optional version with custom in .env file**
  - Web-server: Apache
  - DBMS (database management system): mariadb
  - In-memory database: Redis
  - SSL Certificate (using mkcert)
  
-## Steps
+## Installation and Setup
 
 ### 1. Install ssl certificate
 Using mkcert to create ssl certificate
@@ -62,7 +62,7 @@ PHP_VERSION_SELECTED=8.2 # choose PHP version for your project
 
 APP_NAME=lamp-local # name of your docker project
 APP_PORT=91 # port for docker server (apache)
-SSL_PORT=1445 # port for docker server (apache) with ssl
+SSL_PORT=445 # port for docker server (apache) with ssl
 DB_PORT=13393 # port for database (mariadb)
 
 MYSQL_ROOT_PASS=root
@@ -76,7 +76,7 @@ IP_DB_SERVER=127.0.0.2
 REDIS_PORT=16379 # port for redis (in-memory database)
 ```
 
-### 4. Run to setup: 
+### 4. Run to start the containers
 
 ```shell
 docker-compose up -d
@@ -94,6 +94,20 @@ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <con
 
 ![image](https://imgur.com/eXqHQVb.png)
 
-## Demo 
+### 2. Connect to Database
+
+Use the IP address to connect to the database using the database management system (DBMS) of your choice. For example, using MySQL Workbench:
+
+![image](https://user-images.githubusercontent.com/35853002/232210044-7dd5aafa-352f-45d8-ba99-82cb792b1066.png)
+
+You can also connect to the database using the DB_PORT in .env file
+
+For example, using MySQL Workbench: DB_PORT=13393
+
+![image](https://user-images.githubusercontent.com/35853002/232210171-af56d440-c9f0-4477-a1a7-338b86995cd7.png)
+
+## Demo
+
+This is a demo of the project with the environment variable **PHP_VERSION_SELECTED=7.4**
 
 ![image](https://user-images.githubusercontent.com/35853002/184285134-88e43cd9-d9dd-4110-bda3-c7fb8840835d.png)
