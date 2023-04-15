@@ -43,20 +43,9 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 RUN apt-get update
 RUN ACCEPT_EULA=Y apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
-RUN docker-php-ext-enable sqlsrv pdo_sqlsrv
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions gd pdo_mysql bcmath zip intl opcache mbstring exif
-
-# install xdebug based on the PHP version
-RUN if [[ ${PHP_VERSION_SELECTED} =~ ^7\.[1-4]$ ]]; then \
-        pecl install xdebug-2.9.8; \
-    elif [[ ${PHP_VERSION_SELECTED} =~ ^8\.[0-2]$ ]]; then \
-        pecl install xdebug-3.2.0; \
-    fi
-RUN docker-php-ext-enable xdebug;
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 COPY --from=composer:2.2 /usr/bin/composer /usr/local/bin/composer
