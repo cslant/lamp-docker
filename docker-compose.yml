@@ -51,8 +51,17 @@ services:
     ports:
       - '${PHPMYADMIN_PORT}:${APP_PORT}'
     environment:
-      PMA_HOST: db_server #using db_server host line 26
+      PMA_HOST: db_server
       UPLOAD_LIMIT: 1024M
+    networks:
+      - lamp
+  redis:
+    image: redis
+    container_name: redis_${APP_NAME}
+    hostname: redis
+    restart: 'on-failure'
+    ports:
+      - '${REDIS_PORT}:6379'
     networks:
       - lamp
 volumes:
