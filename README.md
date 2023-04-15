@@ -7,7 +7,7 @@
 To use the optional PHP image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
 
  - Multi-site integration
- - **PHP optional version with custom in .env file**
+ - **PHP optional version with custom in .env file** (example: 7.4, 8.0, 8.1, 8.2)
  - Web-server: Apache
  - DBMS (database management system): mariadb
  - In-memory database: Redis
