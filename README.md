@@ -1,18 +1,19 @@
-# Welcome to Local Docker Config
+# Welcome to Local Docker Config for LAMP Stack
 
-This is a simple Docker Compose workflow that sets up a LAMP network of containers for local
+:whale: This is a simple Docker Compose workflow that sets up a LAMP network of containers for local development. This also allows customizing the optional PHP version :elephant:
 
-## I. Configuration requirements
+## Configuration requirements
 
-To use the fpm image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
+To use the optional PHP image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
 
  - Multi-site integration
- - PHP 8.1
+ - PHP optional version with custom in .env file
  - Web-server: Apache
  - DBMS (database management system): mariadb
+ - In-memory database: Redis
  - SSL Certificate (using mkcert)
  
-## II. Steps
+## Steps
 
 ### 1. Install ssl certificate
 Using mkcert to create ssl certificate
@@ -48,15 +49,42 @@ mkcert local.lamp.com
 cd ../../../
 ```
 
-### 3. Run to setup: 
+### 3. Copy .env.example to .env
+
+```shell
+cp .env.example .env
+```
+
+### 4. Edit .env file
+
+```dotenv
+PHP_VERSION_SELECTED=8.2 # choose PHP version for your project
+
+APP_NAME=lamp-local # name of your docker project
+APP_PORT=91 # port for docker server (apache)
+SSL_PORT=1445 # port for docker server (apache) with ssl
+DB_PORT=13393 # port for database (mariadb)
+
+MYSQL_ROOT_PASS=root
+MYSQL_USER=root
+MYSQL_PASS=root
+MYSQL_DB=lamp-local # name of your database
+
+PHPMYADMIN_PORT=19011 # port for phpmyadmin (database admin)
+IP_DB_SERVER=127.0.0.2
+
+REDIS_PORT=16379 # port for redis (in-memory database)
+```
+
+### 4. Run to setup: 
 
 ```shell
 docker-compose up -d
 ```
 
-## III. Check the network ID and connect Database
+## Check the network ID and connect Database
 
-### 1. Check CONTAINER ID
+### 1. Check CONTAINER_ID
 - Run `docker ps` to check the Container ID of **APP_NAME-db**
 - Run the command `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_ID>`
 
