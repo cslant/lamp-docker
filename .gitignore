@@ -3,3 +3,4 @@
 docker/server/certs
 .DS_Store
 .vscode
+.env
