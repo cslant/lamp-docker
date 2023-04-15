@@ -30,6 +30,11 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && npm install -g n \
     && n stable
 
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions gd pdo_mysql bcmath zip intl opcache mbstring exif pcntl
+
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli
 
 ENV ACCEPT_EULA=Y
@@ -53,20 +58,8 @@ RUN if [[ ${PHP_VERSION_SELECTED} =~ ^7\.[1-4]$ ]]; then \
     fi
 RUN docker-php-ext-enable xdebug;
 
-# install composer based on the PHP version
-RUN if [[ ${PHP_VERSION_SELECTED} =~ ^7\.[1-4]$ ]]; then \
-        COMPOSER_VERSION=1.10.22; \
-    elif [ ${PHP_VERSION_SELECTED} = "8.0" ]; then \
-        COMPOSER_VERSION=2.1.9; \
-    elif [ ${PHP_VERSION_SELECTED} = "8.1" ]; then \
-        COMPOSER_VERSION=2.2.3; \
-    elif [ ${PHP_VERSION_SELECTED} = "8.2" ]; then \
-        COMPOSER_VERSION=2.4.0; \
-    fi
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-COPY --from=composer:${COMPOSER_VERSION} /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.2 /usr/bin/composer /usr/local/bin/composer
 
 EXPOSE 80
 EXPOSE 443
