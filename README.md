@@ -4,14 +4,20 @@
 
 This configuration can be used for any PHP project (Laravel, Yii, CodeIgniter, Pure PHP, etc.) :tada:
 
+## Table of Contents
+
+ - [Configuration requirements](#configuration-requirements)
+ - [Installation and Setup](#installation-and-setup)
+ - [Check the network ID and connect Database](#check-the-network-id-and-connect-database)
+
 > Other docker config: [LEMP Stack (Nginx, PHP, MariaDB, Redis)](https://github.com/tanhongit/lemp-docker.git) :whale:
 
 ## Configuration requirements
 
 To use the optional PHP image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
 
- - Multi-site integration
- - **PHP optional version with custom in .env file** (example: 7.4, 8.0, 8.1, 8.2)
+ - **Multi-site integration**
+ - **PHP optional version with custom in .env file** (example: 7.4, 8.0, 8.1, 8.2, etc.)
  - Web-server: **Apache**
  - DBMS (database management system): **Mariadb**
  - In-memory database: **Redis**
