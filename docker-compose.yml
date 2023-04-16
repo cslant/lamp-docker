@@ -23,6 +23,7 @@ services:
       - ./docker/server/php/php.ini:/usr/local/etc/php/conf.d/extra-php-config.ini
       - ./docker/server/php/php-xdebug.ini:/usr/local/etc/php/conf.d/zz-xdebug-settings.ini
       - ./docker/server/certs:/var/www/certs
+      - ./docker/logs:/var/www/logs
     networks:
       - lamp
 
