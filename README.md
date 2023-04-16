@@ -11,10 +11,10 @@ To use the optional PHP image, you need an additional web server, such as apache
 
  - Multi-site integration
  - **PHP optional version with custom in .env file** (example: 7.4, 8.0, 8.1, 8.2)
- - Web-server: Apache
- - DBMS (database management system): mariadb
- - In-memory database: Redis
- - SSL Certificate (using mkcert)
+ - Web-server: **Apache**
+ - DBMS (database management system): **Mariadb**
+ - In-memory database: **Redis**
+ - SSL Certificate (using **mkcert**)
  
 ## Installation and Setup
 
@@ -43,16 +43,17 @@ mkcert -install
 
 ### 2. Create ssl certificate for this project
 
-Run:
+Go to this docker folder and run:
 
 ```shell
 cd docker/server/certs
 mkcert local.localhost.com
 mkcert local.lamp.com
-cd ../../../
 ```
 
 ### 3. Copy .env.example to .env
+
+Go to this docker folder and run:
 
 ```shell
 cp .env.example .env
@@ -81,6 +82,8 @@ REDIS_PORT=16379 # port for redis (in-memory database)
 
 ### 4. Run to start the containers
 
+Go to this docker folder and run:
+
 ```shell
 docker-compose up -d
 ```
@@ -95,7 +98,7 @@ docker-compose up -d
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_ID>
 ```
 
-![image](https://imgur.com/eXqHQVb.png)
+![image](https://user-images.githubusercontent.com/35853002/232272286-4dd7cc26-1257-4b1e-9605-7d6ecfd69a37.png)
 
 ### 2. Connect to Database
 
