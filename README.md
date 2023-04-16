@@ -2,6 +2,9 @@
 
 :whale: This is a simple Docker Compose workflow that sets up a LAMP network of containers for local development. This also allows customizing the optional PHP version :elephant:
 
+
+> Other docker config: [LEMP Stack (Nginx, PHP, MariaDB, Redis)](https://github.com/tanhongit/lemp-docker.git) :whale:
+
 ## Configuration requirements
 
 To use the optional PHP image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
