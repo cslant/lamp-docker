@@ -2,7 +2,6 @@
 
 :whale: This is a simple Docker Compose workflow that sets up a LAMP network of containers for local development. This also allows customizing the optional PHP version :elephant:
 
-
 > Other docker config: [LEMP Stack (Nginx, PHP, MariaDB, Redis)](https://github.com/tanhongit/lemp-docker.git) :whale:
 
 ## Configuration requirements
@@ -17,6 +16,34 @@ To use the optional PHP image, you need an additional web server, such as apache
  - SSL Certificate (using **mkcert**)
  
 ## Installation and Setup
+
+> **Warning**: If you don't want to use SSL, you can skip step 1 and 2 and edit conf files in _**docker/server/apache/sites-enabled/*.conf**_ to remove the SSL configuration.
+
+Please remove 443 port in _**docker/server/apache/sites-enabled/*.conf**_ file and use 80 port for http:
+
+```apacheconfig
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost.com
+    ServerName local.localhost.com
+    ServerAlias local.com
+    DocumentRoot /var/www/local
+
+    ErrorLog /var/www/logs/error-local.log
+    CustomLog /var/www/logs/access-local.log combined
+
+    SSLEngine on
+	SSLCertificateFile /var/www/certs/local.localhost.com.pem
+	SSLCertificateKeyFile /var/www/certs/local.localhost.com-key.pem
+
+    <Directory /var/www/local>
+        Options +Indexes +Includes +FollowSymLinks +MultiViews
+        AllowOverride All
+        Require all granted
+  </Directory>
+</VirtualHost>
+```
+
+If you want to use SSL, please ignore the above warning and follow all the steps below.
 
 ### 1. Install ssl certificate
 Using mkcert to create ssl certificate
