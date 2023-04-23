@@ -57,7 +57,7 @@ services:
       - '${PHPMYADMIN_PORT}:${APP_PORT}'
     environment:
       PMA_HOST: db_server
-      UPLOAD_LIMIT: 1024M
+      UPLOAD_LIMIT: ${PHPMYADMIN_UPLOAD_LIMIT}
     networks:
       - lamp
 
