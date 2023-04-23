@@ -1,6 +1,7 @@
 .idea
 *.log
 docker/server/certs
+docker/bash/custom.sh
 .DS_Store
 .vscode
 .env

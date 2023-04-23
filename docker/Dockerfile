@@ -2,6 +2,8 @@ ARG PHP_VERSION_SELECTED
 
 FROM php:${PHP_VERSION_SELECTED}-apache
 
+ARG PHP_VERSION
+
 RUN apt-get update && apt-get install -y git unzip zip nano nodejs
 
 WORKDIR /var/www
@@ -44,10 +46,15 @@ RUN curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list > /etc/apt
 RUN apt-get update
 RUN ACCEPT_EULA=Y apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 COPY --from=composer/composer /usr/bin/composer /usr/local/bin/composer
+
+COPY ./docker/bash /docker/bash
+RUN chmod 755 /docker/bash
+
+RUN if test -f /docker/bash/php/php$PHP_VERSION.sh; then bash /docker/bash/php/php$PHP_VERSION.sh; fi
+
+RUN if test -f /docker/bash/custom.sh; then bash /docker/bash/custom.sh; fi
 
 EXPOSE 80
 EXPOSE 443
