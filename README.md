@@ -7,10 +7,53 @@ This configuration can be used for any PHP project (Laravel, Yii, CodeIgniter, P
 ## Table of Contents
 
  - [Configuration requirements](#configuration-requirements)
+ - [Add your custom bash script to run docker](#add-your-custom-bash-script-to-run-docker)
  - [Installation and Setup](#installation-and-setup)
  - [Check the network ID and connect Database](#check-the-network-id-and-connect-database)
 
 > Other docker config: [LEMP Stack (Nginx, PHP, MariaDB, Redis)](https://github.com/tanhongit/lemp-docker.git) :whale:
+
+
+## Add your custom bash script to run docker
+
+> **Because maybe my configuration is not enough to the configuration required by your project or purpose, you need to add more configuration to the docker.**
+
+With the nature of allowing to customize the PHP version according to you. We should also allow custom bash scripts to run when starting the docker.
+
+So, you can add your custom bash script to run docker in the file **_docker/bash/custom.sh_** with the following steps:
+
+### 1. Create a file **_docker/bash/custom.sh_**:
+
+Run:
+
+```bash
+cd docker/bash
+cp custom.sh.example custom.sh
+```
+
+### 2. Add your custom bash script to run docker
+
+Then, you can add your custom bash script to run docker in the file **_docker/bash/custom.sh_**.
+
+For example, you want to install **_ngrok_** extension for your docker container:
+
+```bash
+#!/bin/bash
+
+# Install ngrok
+snap install ngrok
+
+# Install ngrok for php
+docker-php-ext-install ngrok
+
+# You can install other extensions here
+# docker-php-ext-install <extension_name>
+
+# etc.
+npm install -g localtunnel
+```
+
+And now, just follow the steps below and run the docker.
 
 ## Configuration requirements
 
@@ -54,7 +97,7 @@ Please remove 443 port in _**docker/server/apache/sites-enabled/*.conf**_ file a
 If you want to use SSL, please ignore the above warning and follow all the steps below.
 
 ### 1. Install ssl certificate
-Using mkcert to create ssl certificate
+Using **mkcert** to create ssl certificate
 
 #### For Ubuntu
 
@@ -110,7 +153,8 @@ MYSQL_PASS=root
 MYSQL_DB=lamp-local # name of your database
 
 PHPMYADMIN_PORT=19011 # port for phpmyadmin (database admin)
-IP_DB_SERVER=127.0.0.2
+PHPMYADMIN_UPLOAD_LIMIT # upload limit for phpmyadmin
+IP_DB_SERVER=127.0.0.1
 
 REDIS_PORT=16379 # port for redis (in-memory database)
 ```
