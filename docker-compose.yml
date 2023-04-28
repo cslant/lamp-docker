@@ -17,7 +17,7 @@ services:
       - '${SSL_PORT:-4443}:443'
     working_dir: /var/www/
     environment:
-      - 'DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASS}@db_server:3306/${MYSQL_DB}'
+      - 'DATABASE_URL=mysql://${MYSQL_USER:-root}:${MYSQL_PASS:-root}@db_server:3306/${MYSQL_DB:-lamp_local_db}'
     volumes:
       - ./sources:/var/www/
       - ./docker/server/apache/sites-enabled:/etc/apache2/sites-enabled
