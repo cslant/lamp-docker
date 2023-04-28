@@ -30,7 +30,7 @@ services:
 
   db_server:
     image: mariadb
-    container_name: '${APP_NAME}-db'
+    container_name: '${APP_NAME:-lamp_app}-db'
     restart: always
     ports:
       - '${DB_PORT:-13306}:3306'
@@ -43,7 +43,7 @@ services:
       - db_data:/var/lib/mysql
       - ./docker/db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
     healthcheck:
-      test: mysqladmin ping -h ${IP_DB_SERVER} -u root --password=$$MYSQL_ROOT_PASSWORD
+      test: mysqladmin ping -h ${IP_DB_SERVER:-127.0.0.1} -u root --password=${MYSQL_ROOT_PASS:-root}
       interval: 5s
       retries: 5
     networks:
@@ -51,7 +51,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: ${APP_NAME}-phpmyadmin
+    container_name: ${APP_NAME:-lamp_app}-phpmyadmin
     restart: always
     ports:
       - '${PHPMYADMIN_PORT:-9011}:${APP_PORT:-881}'
@@ -63,7 +63,7 @@ services:
 
   redis:
     image: redis
-    container_name: ${APP_NAME}-redis
+    container_name: ${APP_NAME:-lamp_app}-redis
     hostname: redis
     restart: 'on-failure'
     ports:
