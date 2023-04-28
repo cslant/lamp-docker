@@ -193,6 +193,6 @@ For example, using MySQL Workbench: DB_PORT=13393
 
 ## Demo
 
-This is a demo of the project with the environment variable **PHP_VERSION_SELECTED=7.4**
+This is a demo of the project with the environment variable **PHP_VERSION_SELECTED=8.2**
 
-![image](https://user-images.githubusercontent.com/35853002/184285134-88e43cd9-d9dd-4110-bda3-c7fb8840835d.png)
+![image](https://user-images.githubusercontent.com/35853002/235107675-f73e4f5a-2748-41f1-a21c-7419d44b82e8.png)
