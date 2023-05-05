@@ -1,8 +1,8 @@
-ARG PHP_VERSION_SELECTED
+ARG PHP_VERSION_SELECTED=8.2
 
 FROM php:${PHP_VERSION_SELECTED}-apache
 
-ARG PHP_VERSION
+ARG PHP_VERSION=8.2
 
 RUN apt-get update && apt-get install -y git unzip zip nano nodejs
 
