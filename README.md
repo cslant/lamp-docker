@@ -4,6 +4,8 @@
 
 This configuration can be used for any PHP project (Laravel, Yii, CodeIgniter, Pure PHP, etc.) :tada:
 
+[![Docker](https://github.com/lbiltech/lamp-docker/actions/workflows/docker-image.yml/badge.svg)](https://hub.docker.com/r/lbiltech/lamp)
+
 ## Table of Contents
 
  - [Configuration requirements](#configuration-requirements)
