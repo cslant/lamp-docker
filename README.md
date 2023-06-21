@@ -13,14 +13,14 @@ This configuration can be used for any PHP project (Laravel, Yii, CodeIgniter, P
  - [Installation and Setup](#installation-and-setup)
  - [Check the network ID and connect Database](#check-the-network-id-and-connect-database)
 
-> Other docker config: [LEMP Stack (Nginx, PHP, MariaDB, Redis)](https://github.com/tanhongit/lemp-docker.git) :whale:
+> Other docker configs: [LEMP Stack (Nginx, PHP, MariaDB, Redis)](https://github.com/tanhongit/lemp-docker.git) :whale:
 
 
-## Add your custom bash script to run docker
+## Add your custom bash script to run the docker
 
-> **Because maybe my configuration is not enough to the configuration required by your project or purpose, you need to add more configuration to the docker.**
+> **Because maybe my configuration is not enough for the configuration required by your project or purpose, you need to add more configuration to the docker.**
 
-With the nature of allowing to customize the PHP version according to you. We should also allow custom bash scripts to run when starting the docker.
+With nature of allowing you to customize the PHP version according to your. We should also allow custom bash scripts to run when starting the docker.
 
 So, you can add your custom bash script to run docker in the file **_docker/bash/custom.sh_** with the following steps:
 
@@ -33,7 +33,7 @@ cd docker/bash
 cp custom.sh.example custom.sh
 ```
 
-### 2. Add your custom bash script to run docker
+### 2. Add your custom bash script to run the docker
 
 Then, you can add your custom bash script to run docker in the file **_docker/bash/custom.sh_**.
 
@@ -59,20 +59,20 @@ And now, just follow the steps below and run the docker.
 
 ## Configuration requirements
 
-To use the optional PHP image, you need an additional web server, such as apache, that can proxy http-request to the apache-pot of the container. This is not a requirement for the fpm image, but is for the web server.
+To use the optional PHP image, you need an additional web server, such as Apache, that can proxy HTTP-request to the Apache-pot of the container. This is not a requirement for the fpm image but is for the web server.
 
  - **Multi-site integration**
  - **PHP optional version with custom in .env file** (example: 7.4, 8.0, 8.1, 8.2, etc.)
- - Web-server: **Apache**
+ - Web server: **Apache**
  - DBMS (database management system): **Mariadb**
  - In-memory database: **Redis**
  - SSL Certificate (using **mkcert**)
  
 ## Installation and Setup
 
-> **Warning**: If you don't want to use SSL, you can skip step 1 and 2 and edit conf files in _**docker/server/apache/sites-enabled/*.conf**_ to remove the SSL configuration.
+> **Warning**: If you don't want to use SSL, you can skip steps 1 and 2 and edit conf files in _**docker/server/apache/sites-enabled/*.conf**_ to remove the SSL configuration.
 
-Please remove 443 port in _**docker/server/apache/sites-enabled/*.conf**_ file and use 80 port for http:
+Please remove the 443 port in _**docker/server/apache/sites-enabled/*.conf**_ file and use 80 port for HTTP:
 
 ```apacheconfig
 <VirtualHost *:80>
@@ -98,7 +98,7 @@ Please remove 443 port in _**docker/server/apache/sites-enabled/*.conf**_ file a
 
 If you want to use SSL, please ignore the above warning and follow all the steps below.
 
-### 1. Install ssl certificate
+### 1. Install SSL certificate
 Using **mkcert** to create ssl certificate
 
 #### For Ubuntu
@@ -121,7 +121,7 @@ Now that the mkcert utility is installed, run the command below to generate and 
 mkcert -install
 ```
 
-### 2. Create ssl certificate for this project
+### 2. Create an SSL certificate for this project
 
 Go to this docker folder and run:
 
@@ -142,12 +142,12 @@ cp .env.example .env
 ### 4. Edit .env file
 
 ```dotenv
-PHP_VERSION_SELECTED=8.2 # choose PHP version for your project
+PHP_VERSION_SELECTED=8.2 # Choose the PHP version for your project
 
 APP_NAME=lamp-local # name of your docker project
 APP_PORT=91 # port for docker server (apache)
-SSL_PORT=445 # port for docker server (apache) with ssl
-DB_PORT=13393 # port for database (mariadb)
+SSL_PORT=445 # port for docker server (apache) with SSL
+DB_PORT=13393 # port for a database (MariaDB)
 
 MYSQL_ROOT_PASS=root
 MYSQL_USER=root
@@ -158,7 +158,7 @@ PHPMYADMIN_PORT=19011 # port for phpmyadmin (database admin)
 PHPMYADMIN_UPLOAD_LIMIT # upload limit for phpmyadmin
 IP_DB_SERVER=127.0.0.1
 
-REDIS_PORT=16379 # port for redis (in-memory database)
+REDIS_PORT=16379 # port for Redis (in-memory database)
 ```
 
 ### 4. Run to start the containers
@@ -169,7 +169,7 @@ Go to this docker folder and run:
 docker-compose up -d
 ```
 
-## Check the network ID and connect Database
+## Check the network ID and connect the Database
 
 ### 1. Check CONTAINER_ID
 - Run `docker ps` to check the Container ID of **APP_NAME-db**
@@ -187,7 +187,7 @@ Use the IP address to connect to the database using the database management syst
 
 ![image](https://user-images.githubusercontent.com/35853002/232210044-7dd5aafa-352f-45d8-ba99-82cb792b1066.png)
 
-You can also connect to the database using the DB_PORT in .env file
+You can also connect to the database using the DB_PORT in the .env file
 
 For example, using MySQL Workbench: DB_PORT=13393
 
